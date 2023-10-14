@@ -7,13 +7,25 @@
 
 import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
-import Navigator from './src/navigation/Navigator';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import HomeScreen from './src/screens/HomeScreen';
+import NoteScreen from './src/screens/NoteScreen';
+import FormNoteScreen from './src/screens/FormNoteScreen';
+import {ProviderNotes} from './src/hooks/useProviderNotes';
+
+const Stack = createNativeStackNavigator();
 
 function App(): JSX.Element {
   return (
-    <NavigationContainer>
-      <Navigator />
-    </NavigationContainer>
+    <ProviderNotes>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{headerShown: false}}>
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Notes" component={NoteScreen} />
+          <Stack.Screen name="FormNote" component={FormNoteScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </ProviderNotes>
   );
 }
 

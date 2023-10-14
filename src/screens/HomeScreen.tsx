@@ -2,13 +2,15 @@ import {Text, SafeAreaView, TouchableOpacity} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import * as Keychain from 'react-native-keychain';
 import {useNavigation} from '@react-navigation/native';
+import {useNotes} from '../hooks/useProviderNotes';
 
 export default function HomeScreen() {
+  const {setSecretKey} = useNotes();
   const navigation = useNavigation();
 
   async function load() {
     const username = 'hariirawan';
-    const password = 'mantap123';
+    const password = 'secretKey123';
 
     await Keychain.setGenericPassword(username, password, {
       accessControl:
@@ -20,6 +22,8 @@ export default function HomeScreen() {
     try {
       const credentials = await Keychain.getGenericPassword({});
       if (credentials) {
+        console.log(credentials);
+        setSecretKey(credentials?.password);
         navigation.navigate('Notes');
       } else {
         console.log('no credential');
