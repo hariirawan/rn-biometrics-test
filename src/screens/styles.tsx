@@ -4,10 +4,10 @@ export const styles = StyleSheet.create({
   input: {
     borderWidth: 1,
     backgroundColor: '#445093',
-    marginHorizontal: 10,
     marginTop: 10,
     paddingHorizontal: 20,
     borderRadius: 10,
+    color: 'white',
   },
   button: {
     backgroundColor: '#7F92F9',

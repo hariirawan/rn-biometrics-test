@@ -4,7 +4,6 @@ import {
   SafeAreaView,
   TouchableOpacity,
   TextInput,
-  StyleSheet,
   Alert,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
@@ -16,6 +15,8 @@ import {styles} from './styles';
 export default function AuthScreen() {
   const {setSecretKey} = useNotes();
   const navigation = useNavigation();
+  const [isSupportBiometric, setIsSupportBiometric] = useState(false);
+
   const username = 'hariirawan';
   const password = 'secretKey123';
 
@@ -44,7 +45,12 @@ export default function AuthScreen() {
   }
 
   useEffect(() => {
-    load();
+    Keychain.getSupportedBiometryType({}).then(biometryType => {
+      if (biometryType === Keychain.BIOMETRY_TYPE.FINGERPRINT) {
+        load();
+        setIsSupportBiometric(true);
+      }
+    });
   }, []);
 
   return (
@@ -73,7 +79,7 @@ export default function AuthScreen() {
             onChangeText={text => setPass(text)}
           />
           <TouchableOpacity
-            style={styles.button}
+            style={[styles.button, {width: '100%'}]}
             onPress={() => {
               if (username == name && password == pass) {
                 setSecretKey(name);
@@ -84,13 +90,17 @@ export default function AuthScreen() {
             }}>
             <Text style={{textAlign: 'center', color: 'white'}}>Login</Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.button, {width: '100%'}]}
-            onPress={() => {
-              load();
-            }}>
-            <Text style={{textAlign: 'center', color: 'white'}}>Biometrik</Text>
-          </TouchableOpacity>
+          {isSupportBiometric && (
+            <TouchableOpacity
+              style={[styles.button]}
+              onPress={() => {
+                load();
+              }}>
+              <Text style={{textAlign: 'center', color: 'white'}}>
+                Biometrik
+              </Text>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
     </SafeAreaView>

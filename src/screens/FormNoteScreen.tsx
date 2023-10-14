@@ -6,9 +6,9 @@ import {
   View,
   Alert,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useNotes} from '../hooks/useProviderNotes';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {encryptText} from '../utils/crypto';
 import {styles} from './styles';
 
@@ -16,12 +16,20 @@ export default function FormNoteScreen() {
   const navigation = useNavigation();
   const {addNotes, secretKey} = useNotes();
   const [note, setNote] = useState<string>('');
+  const route: any = useRoute();
+
+  useEffect(() => {
+    if (route.params?.note) {
+      setNote(route.params?.note);
+    }
+  }, [route.params]);
 
   return (
     <SafeAreaView
       style={{
         backgroundColor: '#20274A',
         flex: 1,
+        paddingHorizontal: 20,
       }}>
       <TextInput
         placeholder="Please input your note"

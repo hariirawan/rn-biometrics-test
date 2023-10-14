@@ -24,7 +24,12 @@ export default function NoteScreen() {
         ItemSeparatorComponent={() => <View style={{height: 10}} />}
         renderItem={({item}) => {
           return (
-            <View
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate('FormNote', {
+                  note: decryptText(item, secretKey),
+                })
+              }
               style={{
                 backgroundColor: '#445093',
                 borderRadius: 12,
@@ -35,7 +40,7 @@ export default function NoteScreen() {
               <Text style={{color: 'white'}}>
                 {decryptText(item, secretKey)}
               </Text>
-            </View>
+            </TouchableOpacity>
           );
         }}
       />
