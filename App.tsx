@@ -12,6 +12,7 @@ import HomeScreen from './src/screens/HomeScreen';
 import NoteScreen from './src/screens/NoteScreen';
 import FormNoteScreen from './src/screens/FormNoteScreen';
 import {ProviderNotes} from './src/hooks/useProviderNotes';
+import AuthScreen from './src/screens/AuthScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +22,7 @@ function App(): JSX.Element {
       <NavigationContainer>
         <Stack.Navigator screenOptions={{headerShown: false}}>
           <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Auth" component={AuthScreen} />
           <Stack.Screen name="Notes" component={NoteScreen} />
           <Stack.Screen name="FormNote" component={FormNoteScreen} />
         </Stack.Navigator>
