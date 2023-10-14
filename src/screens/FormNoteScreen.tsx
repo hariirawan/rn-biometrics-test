@@ -10,6 +10,7 @@ import React, {useState} from 'react';
 import {useNotes} from '../hooks/useProviderNotes';
 import {useNavigation} from '@react-navigation/native';
 import {encryptText} from '../utils/crypto';
+import {styles} from './styles';
 
 export default function FormNoteScreen() {
   const navigation = useNavigation();
@@ -24,14 +25,7 @@ export default function FormNoteScreen() {
       }}>
       <TextInput
         placeholder="Please input your note"
-        style={{
-          borderWidth: 1,
-          backgroundColor: '#445093',
-          marginHorizontal: 10,
-          marginTop: 10,
-          paddingHorizontal: 20,
-          borderRadius: 10,
-        }}
+        style={styles.input}
         value={note}
         onChangeText={(text: string) => setNote(text)}
       />

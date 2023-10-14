@@ -9,7 +9,7 @@ import {
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {useNotes} from '../hooks/useProviderNotes';
-import {decryptText, encryptText} from '../utils/crypto';
+import {decryptText} from '../utils/crypto';
 
 export default function NoteScreen() {
   const navigation = useNavigation();

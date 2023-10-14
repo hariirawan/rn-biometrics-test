@@ -11,6 +11,7 @@ import React, {useEffect, useState} from 'react';
 import * as Keychain from 'react-native-keychain';
 import {useNotes} from '../hooks/useProviderNotes';
 import {useNavigation} from '@react-navigation/native';
+import {styles} from './styles';
 
 export default function AuthScreen() {
   const {setSecretKey} = useNotes();
@@ -84,7 +85,7 @@ export default function AuthScreen() {
             <Text style={{textAlign: 'center', color: 'white'}}>Login</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={styles.button}
+            style={[styles.button, {width: '100%'}]}
             onPress={() => {
               load();
             }}>
@@ -95,23 +96,3 @@ export default function AuthScreen() {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  input: {
-    borderWidth: 1,
-    backgroundColor: '#445093',
-    marginTop: 10,
-    paddingHorizontal: 20,
-    borderRadius: 10,
-    color: 'white',
-  },
-  button: {
-    backgroundColor: '#7F92F9',
-    padding: 15,
-    paddingHorizontal: 30,
-    alignSelf: 'center',
-    borderRadius: 10,
-    width: '100%',
-    marginTop: 10,
-  },
-});
